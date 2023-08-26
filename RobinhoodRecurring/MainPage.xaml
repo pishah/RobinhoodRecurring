@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RobinhoodRecurring.MainPage">
+    <Grid BackgroundColor="#3ec800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Source="pastelback11.png" Aspect="AspectFill" Opacity="0.3" Grid.RowSpan="2" />
+        <Image Source="robback.png" Aspect="AspectFill" Opacity="0.1" Grid.RowSpan="2" />
+        <!--This grid will hold the content for collecting the data, the initial view-->
+        <Grid x:Name="gridText">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*" x:Name="rowEntry"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Center" Opacity="1">
+                <Image Source="roblogo.png" WidthRequest="30" HeightRequest="30" Margin="12,0,0,0" />
+                <StackLayout>
+                    <!--we will use this lable as a hyperlink for the link to get the data from Robinhood using Gesture Listener events-->
+                    <Label x:Name="txtHelper" Margin="12,6" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEnteredRobin" PointerExited="PointerGestureRecognizer_PointerExitedRobin"></PointerGestureRecognizer>
+                            <!--listener for the click event to open the URL-->
+                            <ClickGestureRecognizer Clicked="ClickGestureRecognizer_ClickedRobin"></ClickGestureRecognizer>
+                            <TapGestureRecognizer Tapped="ClickGestureRecognizer_ClickedRobin"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        Ctrl A copy all text from this link and paste it in the textbox below
+                    </Label>
+                    <Border BackgroundColor="White" WidthRequest="700" HeightRequest="2" Opacity="0.5"></Border>
+                </StackLayout>
+
+            </StackLayout>
+            <!--Border to try and make our editor look more interesting-->
+            <Border StrokeShape="RoundRectangle 12" Grid.Row="1" BackgroundColor="#ffffff" Margin="12" Opacity="0.7">
+                <ScrollView >
+                    <!--our Editor control for pasting the text from Robinhood-->
+                    <Editor x:Name="txtText" Grid.Row="1" MaxLength="50000000" Keyboard="Plain" AutoSize="TextChanges" Margin="12" TextColor="Gray"></Editor>
+                </ScrollView>
+            </Border>
+            <!--button for calculating the amount from the textbox-->
+            <Button x:Name="btnPasted" Clicked="btnPasted_Clicked" Grid.Row="2" Text="Calculate Amount" Margin="12"></Button>
+        </Grid>
+        <!--This Grid will hold the content to show the value-->
+        <Grid x:Name="gridValue" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <Label TextColor="Black" HorizontalOptions="Center">Your total recurring daily investments come out to</Label>
+                <Label TextColor="Black" x:Name="lblTotal" Margin="12" FontSize="172" HorizontalOptions="Center"></Label>
+                <Button x:Name="btnReset" Clicked="btnReset_Clicked" Text="start over"></Button>
+            </StackLayout>
+        </Grid>
+        <!--Grid for our Footer Content-->
+        <Grid Grid.Row="1" BackgroundColor="{AppThemeBinding Light=#50000000, Dark=#05ffffff}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="btnTrademark" Margin="-0.5" StrokeShape="RoundRectangle 0, 0, 0,90" BackgroundColor="{AppThemeBinding Light=#50000000, Dark=#05ffffff}" MaximumWidthRequest="200" MinimumWidthRequest="150" HorizontalOptions="Start">
+                <Border.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered" PointerExited="PointerGestureRecognizer_PointerExited"></PointerGestureRecognizer>
+
+                    <ClickGestureRecognizer Clicked="ClickGestureRecognizer_Clicked"></ClickGestureRecognizer>
+                    <TapGestureRecognizer Tapped="ClickGestureRecognizer_Clicked"></TapGestureRecognizer>
+                </Border.GestureRecognizers>
+                <Label Opacity="0.7" x:Name="txtTrademark" FontFamily="InterNormal" TextColor="White" Text="pishah llc"  VerticalOptions="Center" HorizontalOptions="Center">
+                </Label>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>
